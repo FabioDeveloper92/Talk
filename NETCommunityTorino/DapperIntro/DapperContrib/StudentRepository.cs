@@ -1,4 +1,5 @@
-﻿//using Dapper.Contrib.Extensions;
+﻿using Dapper.Contrib.Extensions;
+using System.Data.SqlClient;
 
 namespace DapperIntro.DapperContrib
 {
@@ -11,62 +12,62 @@ namespace DapperIntro.DapperContrib
             _connectionString = connectionString;
         }
 
-        //public Student GetStudent(int id)
-        //{
-        //    using var connection = new SqlConnection(_connectionString);
-        //    var student = connection.Get<Student>(id);
+        public async Task<Student> GetStudent(int id)
+        {
+            using var connection = new SqlConnection(_connectionString);
+            var student = await connection.GetAsync<Student>(id);
 
-        //    return student;
-        //}
+            return student;
+        }
 
-        //public Student[] GetStudents()
-        //{
-        //    using var connection = new SqlConnection(_connectionString);
-        //    var students = connection.GetAll<Student>();
+        public async Task<Student[]> GetStudents()
+        {
+            using var connection = new SqlConnection(_connectionString);
+            var students = await connection.GetAllAsync<Student>();
 
-        //    return students.ToArray();
-        //}
+            return students.ToArray();
+        }
 
-        //public void Insert(Student student)
-        //{
-        //    using var connection = new SqlConnection(_connectionString);
-        //    connection.Insert(student);
-        //}
+        public async Task InsertStudent(Student student)
+        {
+            using var connection = new SqlConnection(_connectionString);
+            await connection.InsertAsync(student);
+        }
 
-        //public void Insert(Student[] students)
-        //{
-        //    using var connection = new SqlConnection(_connectionString);
-        //    connection.Insert(students);
-        //}
+        public async Task InsertStudents(Student[] students)
+        {
+            using var connection = new SqlConnection(_connectionString);
+            await connection.InsertAsync(students);
+        }
 
-        //public void Update(Student student)
-        //{
-        //    using var connection = new SqlConnection(_connectionString);
-        //    connection.Update(student);
-        //}
+        public async Task Update(Student student)
+        {
+            using var connection = new SqlConnection(_connectionString);
+            await connection.UpdateAsync(student);
+        }
 
-        //public void Update(Student[] students)
-        //{
-        //    using var connection = new SqlConnection(_connectionString);
-        //    connection.Update(students);
-        //}
+        public async Task Update(Student[] students)
+        {
+            using var connection = new SqlConnection(_connectionString);
+            await connection.UpdateAsync(students);
+        }
 
-        //public void Delete(Student student)
-        //{
-        //    using var connection = new SqlConnection(_connectionString);
-        //    connection.Delete(student);
-        //}
+        public async Task Delete(Student student)
+        {
+            using var connection = new SqlConnection(_connectionString);
+            await connection.DeleteAsync(student);
+        }
 
-        //public void Delete(Student[] students)
-        //{
-        //    using var connection = new SqlConnection(_connectionString);
-        //    connection.Delete(students);
-        //}
+        public async Task Delete(Student[] students)
+        {
+            using var connection = new SqlConnection(_connectionString);
+            await connection.DeleteAsync(students);
+        }
 
-        //public void DeleteAll()
-        //{
-        //    using var connection = new SqlConnection(_connectionString);
-        //    connection.DeleteAll<Student>();
-        //}
+        public async Task DeleteAll()
+        {
+            using var connection = new SqlConnection(_connectionString);
+            await connection.DeleteAllAsync<Student>();
+        }
     }
 }
